@@ -6,11 +6,23 @@ vector<int> friends;
 vector<int> enemies;
 
 int findEnemies(int x) {
+    if(enemies[x] == -1) {
+        return -1;
+    }
+
     if(enemies[x] == x) {
         return x;
     }
 
     return enemies[x] = findEnemies(enemies[x]);
+}
+
+int findFriends(int x) {
+    if(friends[x] == x) {
+        return x;
+    }
+
+    return friends[x] = findFriends(friends[x]);
 }
 
 void joinEnemies(int x, int y) {
@@ -20,14 +32,6 @@ void joinEnemies(int x, int y) {
     }
 
     enemies[findEnemies(x)] = findEnemies(y);
-}
-
-int findFriends(int x) {
-    if(friends[x] == x) {
-        return x;
-    }
-
-    return friends[x] = findFriends(friends[x]);
 }
 
 void joinFriends(int x, int y) {
@@ -43,12 +47,40 @@ void joinFriends(int x, int y) {
 int main() {
     int n, c, x, y;
     cin >> n;
-    friends.resize(n + 1);
-    enemies.resize(n + 1);
+    friends.resize(n);
+    enemies.resize(n);
     
-    do {
+    for(int i = 0; i < n; i++) {
+        friends[i] = i;
+        enemies[i] = -1;
+    }
 
-    } while(c && x && y);
+    cin >> c >> x >> y;
+
+    while(c || x || y) {
+        switch(c) {
+            case 1:
+                joinFriends(x, y);
+                break;
+
+            case 2:
+                joinEnemies(x, y);
+                break;
+
+            case 3:
+                findFriends(x) == findFriends(y) ? cout << "1\n" : cout << "0\n";
+                break;
+
+            case 4:
+                findEnemies(x) == findEnemies(y) ? cout << "1\n" : cout << "0\n";
+                break;
+            
+            default:
+                break;
+        }
+
+        cin >> c >> x >> y;
+    }
 
     return 0;
 }
