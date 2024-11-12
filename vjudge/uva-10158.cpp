@@ -6,10 +6,6 @@ vector<int> friends;
 vector<int> enemies;
 
 int findEnemies(int x) {
-    if(enemies[x] == -1) {
-        return -1;
-    }
-
     if(enemies[x] == x) {
         return x;
     }
