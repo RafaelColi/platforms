@@ -7,9 +7,10 @@ vector<vector<int>> trees;
 vector<bool> visited;
 
 void bl() {
-    int count = 1;
+    int count = 0;
     queue<int> q;
     q.push(0);
+    visited[0] = true;
 
     while(!q.empty()) {
         int u = q.front();
@@ -19,9 +20,10 @@ void bl() {
             if(!visited[v]) {
                 visited[v] = true;
                 q.push(v);
-                count++;
             }
         }
+
+        count++;
     }
 
     if(count < n) 
@@ -33,7 +35,7 @@ void bl() {
 }
 
 int main() {
-    scanf("%d %d", &n, &d);
+    cin >> n >> d;
 
     vector<pair<int, int>> coord(n);
     trees.resize(n);
@@ -41,7 +43,7 @@ int main() {
 
     for(int i = 0; i < n; i++) {
         int x, y;
-        scanf("%d %d", &x, &y);
+       cin >> x >> y;
 
         coord[i] = {x, y};
     }
@@ -55,7 +57,7 @@ int main() {
             u = {coord[i].first, coord[i].second};
             v = {coord[j].first, coord[j].second};
 
-            if((long double) sqrt((long double) pow(v.first - u.first, 2) + pow(v.second - u.second, 2)) <= d) {
+            if(sqrt(pow(v.first - u.first, 2) + pow(v.second - u.second, 2)) <= d) {
                 trees[i].push_back(j);
                 trees[j].push_back(i);
             }
