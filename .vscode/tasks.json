@@ -1,15 +1,13 @@
 {
     "tasks": [
         {
-            "type": "cppbuild",
+            "type": "shell",
             "label": "C/C++: g++ arquivo de build ativo",
             "command": "/usr/bin/g++",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}.out"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -18,7 +16,7 @@
                 "$gcc"
             ],
             "group": {
-                "kind": "build",
+                "kind": "none",
                 "isDefault": true
             },
             "detail": "Tarefa gerada pelo Depurador."
